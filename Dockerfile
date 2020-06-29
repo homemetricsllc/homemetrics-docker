@@ -1,5 +1,5 @@
 #Based from cloud SDK
-FROM cloud-sdk:latest
+FROM google/cloud-sdk:latest
 
 #Install needed apps
 RUN apt-get update && apt-get install -y python3-dev python3-pip ssh-client git
