@@ -2,7 +2,7 @@
 FROM google/cloud-sdk:latest
 
 #Install needed apps
-RUN apt-get update && apt-get install -y python3-dev python3-pip ssh-client git
+RUN apt-get update && apt-get install -y python3-dev python3-pip ssh-client git wget
 
 WORKDIR /usr/src/app
 
