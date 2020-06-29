@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y python3-dev python3-pip ssh-client git 
 WORKDIR /usr/src/app
 
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy &&
-    chmod +x cloud_sql_proxy
+    /bin/bash -c 'chmod +x cloud_sql_proxy'
 
 COPY requirements.txt ./
 
