@@ -14,3 +14,8 @@ RUN /bin/bash -c 'chmod +x cloud_sql_proxy'
 COPY requirements.txt ./
 
 RUN pip3 install -r requirements.txt
+RUN gcloud components install pubsub-emulator
+RUN gcloud components update
+RUN gcloud beta emulators pubsub start --project=homemetricsdev
+
+RUN $(gcloud beta emulators pubsub env-init)
