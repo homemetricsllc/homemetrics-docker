@@ -7,9 +7,9 @@ RUN apt-get update &&\
     apt-get install google-cloud-sdk-pubsub-emulator &&\ 
     apt-get --only-upgrade install google-cloud-sdk-datastore-emulator google-cloud-sdk-app-engine-java google-cloud-sdk-bigtable-emulator google-cloud-sdk-app-engine-go google-cloud-sdk-spanner-emulator kubectl google-cloud-sdk-firestore-emulator google-cloud-sdk-datalab google-cloud-sdk-app-engine-python-extras google-cloud-sdk-cbt google-cloud-sdk-app-engine-python
 
+## Install Cloud SQL Proxy
 
 WORKDIR /usr/src/app
-
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy &&\
     /bin/bash -c 'chmod +x cloud_sql_proxy'
 
@@ -22,7 +22,7 @@ RUN apt-get install -y build-essential libssl-dev &&\
     make &&\
     make install 
 
-## Setup ESP
+## Setup ESP-IDF
 WORKDIR /home/root/esp
 RUN apt-get install -y flex bison gperf python python-pip python-setuptools ninja-build ccache libffi-dev libssl-dev dfu-util &&\
     update-alternatives --install /usr/bin/python python /usr/bin/python3 10 &&\
@@ -47,5 +47,8 @@ EXPOSE 5432
 # RUN touch ~/.pgpass && chmod 600 ~/.pgpass && echo "localhost:5432:*:hm_user:hm1" > ~/.pgpass 
 # RUN psql -h localhost testing_db
 
+## Install requirements
+## Upgrade pip first to speedup install for some packages
 COPY requirements.txt ./
-RUN pip3 install -r requirements.txt
+RUN pip3 install --upgrade pip &&\
+    pip3 install -r requirements.txt
