@@ -11,6 +11,15 @@ WORKDIR /usr/src/app
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy &&\
     /bin/bash -c 'chmod +x cloud_sql_proxy'
 
+## Manual CMake Install
+RUN apt-get installi -y build-essential libssl-dev
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.16.5/cmake-3.16.5.tar.gz &&\
+    tar -zxvf cmake-3.16.5.tar.gz &&\
+    cd cmake-3.16.5 &&\
+    ./bootstrap &&\
+    make &&\
+    make install 
+
 ## Setup ESP
 RUN apt-get install -y flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
