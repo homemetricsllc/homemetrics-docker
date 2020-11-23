@@ -21,7 +21,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.16.5/cmake-3.16.5
     make install 
 
 ## Setup ESP
-RUN apt-get install -y flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util
+RUN apt-get install -y flex bison gperf python python-pip python-setuptools ninja-build ccache libffi-dev libssl-dev dfu-util
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 RUN mkdir -p ~/esp && cd ~/esp
 WORKDIR ~/esp
