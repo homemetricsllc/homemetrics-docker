@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl apt-transp
 
 
 #Install needed apps
-RUN apt-get install -y --no-install-recommends cmake postgresql postgresql-contrib python3 python3-setuptools python3-dev python3-pip ssh-client git wget
+RUN apt-get install -y --no-install-recommends cmake postgresql postgresql-contrib python3 python3-setuptools python3-dev python3-pip ssh-client git wget make gcc g++
 
 ## Install Cloud SQL Proxy
 
@@ -32,7 +32,6 @@ RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql
 #    make install 
 
 ## Setup ESP-IDF
-WORKDIR /home/root/esp
 RUN apt-get install -y --no-install-recommends flex bison gperf ninja-build ccache libffi-dev libssl-dev dfu-util &&\
     update-alternatives --install /usr/bin/python python /usr/bin/python3 10 &&\
     mkdir -p /home/root/esp &&\
@@ -62,3 +61,4 @@ COPY requirements.txt ./
 RUN pip3 install --upgrade pip &&\
     pip3 install -r requirements.txt
 WORKDIR /usr/src/app
+USER root
